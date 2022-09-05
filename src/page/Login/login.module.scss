@@ -1,0 +1,24 @@
+.login{
+    .container{
+        padding: 100px 100px;
+    }
+    .left{
+        background-image: url(../../asset/image/bgLoginn.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    .right{
+        padding: 100px 100px;
+
+        .facebookLogin{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .register{
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+}

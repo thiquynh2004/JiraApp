@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Button, Checkbox, Col, Form, Input, message, Row } from "antd";
+import { Button, Checkbox, Col, Form, Input, Row } from "antd";
 // import { FacebookOutlined } from "@ant-design/icons";
 import React, { useEffect } from "react";
 import {Link, useNavigate} from "react-router-dom";
@@ -16,9 +16,10 @@ export default function Login() {
   const navigate = useNavigate();
   useEffect(() => {
     if(localStorage.getItem(USER_LOGIN)){
-      navigate('/')
+    navigate("/")
     }
   },[])
+
  
   const formik = useFormik({
     initialValues: {
@@ -29,26 +30,24 @@ export default function Login() {
       const action = dangNhapAction(values);
       dispatch(action);
       console.log("values", values);
-      message.success(
-        {
-          content: "Đăng nhập thành công",
-          className: "message",
-          style: {
-            marginTop: "10vh",
-            fontSize: "20px",
-          },
-        },
-        setTimeout(() => {
-         navigate("/")
-        }, 1000)
-      );
+      // message.success(
+      //   {
+      //     content: "Đăng nhập thành công",
+      //     className: "message",
+      //     style: {
+      //       marginTop: "10vh",
+      //       fontSize: "20px",
+      //     },
+      //   },
+      //   setTimeout(() => {
+      //    navigate("/")
+      //   }, 1000)
+      // );
     }
 
   })
   return (
     <div className={styles.login}>
-      {/* <div className={styles.container}> */}
-
       <Row style={{ height: window.innerHeight }}>
         <Col span={12} className={styles.left}>
           {/* <h1>Welcome to </h1> */}
@@ -129,7 +128,7 @@ export default function Login() {
           </div>
           <div className={styles.register}>
             <p>Don't you have an account?</p>
-            <Link to ="/register">Register</Link>
+            <Link to ="/signup">Sign Up </Link>
           </div>
         </Col>
       </Row>

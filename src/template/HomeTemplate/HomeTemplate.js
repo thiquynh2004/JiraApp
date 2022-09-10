@@ -27,7 +27,7 @@ export default function HomeTemplate() {
         <Menu
           theme="default"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={["3"]}
           defaultOpenKeys={["sub1"]}
           style={{
             height: "100%",
@@ -47,7 +47,6 @@ export default function HomeTemplate() {
             className="site-layout-background"
             style={{
               padding: 24,
-              // minHeight: 360,
             }}
           >
             <Outlet />

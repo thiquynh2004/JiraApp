@@ -21,10 +21,10 @@ export default function EditProject(props) {
 
   console.log("projectDetail", projectDetail);
   console.log("arrProjectCategory", arrProjectCategory);
-  const { id } = useParams();
+  const { projectId } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getProjectDetailAction(id));
+    dispatch(getProjectDetailAction(projectId));
   }, []);
   useEffect(() => {
     dispatch(getProjectCategoryAction());
@@ -52,8 +52,6 @@ export default function EditProject(props) {
         },
         setTimeout(() => {
           navigate("/project-management")
-
-          // history is available by design in this.props when using react-router
         }, 3000)
       );
     }
@@ -61,14 +59,14 @@ export default function EditProject(props) {
   })
   const handleChangeSelect = (value) => {
     formik.setFieldValue("categoryId", value);
-    console.log("categoryId", value);
+    // console.log("categoryId", value);
   };
-  const handleEditorChange = (value) => {
-    formik.setFieldValue("description");
+  const handleEditorChange = (content, editor) => {
+    formik.setFieldValue("description",content);
   };
   return (
     <div className="edit-project">
-      <h1>Edit {projectDetail.projectName}</h1>
+      <h1>Edit Project:  <i>{projectDetail.projectName}</i> </h1>
       <Form layout="vertical" hideRequiredMark
        onSubmitCapture={formik.handleSubmit}>
         
@@ -82,10 +80,9 @@ export default function EditProject(props) {
           <Col span={8}>
             <Form.Item label="Project Category">
               <Select
-                value={projectDetail?.projectCategory?.id}
+                defaultValue={projectDetail?.projectCategory?.id}
                 name="categoryId"
                 options={arrProjectCategory?.map((pjCategory, index) => ({
-                  // key={index},
                   label: pjCategory.projectCategoryName,
                   value: pjCategory.id,
                 }))}
@@ -103,7 +100,7 @@ export default function EditProject(props) {
                   process.env.PUBLIC_URL + "/tinymce/tinymce.min.js"
                 }
                 onInit={(evt, editor) => (editorRef.current = editor)}
-                initialValue={formik.values.description}
+                // initialValue={formik.values.description}
                 value={formik.values.description}
                 init={{
                   minHeight: "40vh",
@@ -139,9 +136,9 @@ export default function EditProject(props) {
               />
             </Form.Item>
             <Form.Item label="">
-              <Button type="primary" htmlType="submit">
+              {/* <Button type="primary" htmlType="submit">
                 Cancel
-              </Button>
+              </Button> */}
               <Button type="primary" htmlType="submit">
                 Cập nhật
               </Button>

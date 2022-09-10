@@ -33,7 +33,7 @@ export const menuItems = [
   },
   {
     label: (
-      <NavLink to="/jira">Jira Board</NavLink>
+      <NavLink to="/#">Jira Board</NavLink>
     ),
     key: '5',
     icon: <SettingOutlined />,

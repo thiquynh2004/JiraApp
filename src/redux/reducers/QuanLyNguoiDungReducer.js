@@ -1,5 +1,5 @@
 import { TOKEN, USER_LOGIN } from "../../util/config";
-import { DANG_NHAP_ACTION } from "../actions/types/QuanLyNguoiDungType";
+import { DANG_NHAP_ACTION, SET_GET_LIST_USERS, SET_GET_USER_BY_PROJECT } from "../actions/types/QuanLyNguoiDungType";
 
 let user = {};
 if (localStorage.getItem(USER_LOGIN)) {
@@ -7,6 +7,9 @@ if (localStorage.getItem(USER_LOGIN)) {
 }
 const initialState = {
   userLogin: user,
+  arrUsers:[],
+  arrUserByProjects:[]
+  
 };
 
 export const QuanLyNguoiDungReducer = (state = initialState, action) => {
@@ -17,6 +20,14 @@ export const QuanLyNguoiDungReducer = (state = initialState, action) => {
       localStorage.setItem(TOKEN, thongTinDangNhap.accessToken);
       return{ ...state, userLogin:thongTinDangNhap}
     }
+    case SET_GET_LIST_USERS:{
+     state.arrUsers = action.arrUsers;
+     return{ ...state}
+     }
+     case SET_GET_USER_BY_PROJECT: {
+      state.arrUserByProjects = action.arrUserByProjects;
+      return{ ...state }
+     }
     default:
       return { ...state };
   }

@@ -12,5 +12,11 @@ export class QuanLyNguoiDungService extends baseService {
     signup = (thongTinDangKy) => {
         return this.post(`api/Users/signup`, thongTinDangKy);
     }
+    getUsers =  (keyword) => {
+        return this.get(`api/Users/getUser?keyword=${keyword}`)
+    }
+    getUserByProjectId = (idProject) => {
+        return this.get(`api/Users/getUserByProjectId?idProject=${idProject}`)
+    }
 }
 export const quanLyNguoiDungService = new QuanLyNguoiDungService();

@@ -91,7 +91,6 @@ export default function CreateProject() {
               process.env.PUBLIC_URL + "/tinymce/tinymce.min.js"
             }
             onInit={(evt, editor) => (editorRef.current = editor)}
-            // initialValue=""
             init={{
               height: 500,
               menubar: false,

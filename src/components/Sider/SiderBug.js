@@ -4,28 +4,10 @@ import {
   PlusOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { Button, Menu } from "antd";
+import { Button, Menu, Modal } from "antd";
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import CreateTask from "../../page/CreateTask/CreateTask";
 
-function getItem(label, key, icon, children, type) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type,
-  };
-}
-
-const items = [
-  getItem(
-    <NavLink to="/create-issues">Create issues</NavLink>,
-    "1",
-    <PlusOutlined />
-  ),
-  getItem(<NavLink to="/search">Search</NavLink>, "2", <SearchOutlined />),
-];
 
 export default function SiderBug() {
   const [collapsed, setCollapsed] = useState(false);
@@ -33,39 +15,69 @@ export default function SiderBug() {
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
+  const [open, setOpen] = useState(false);
+
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const items = [
+    {
+      label: (
+        <>
+          <span type="primary" onClick={() => setOpen(true)}>
+            Create task
+          </span>
+          <Modal
+            title="Create task"
+            centered
+            open={open}
+            onOk={() => setOpen(false)}
+            onCancel={() => setOpen(false)}
+            width={1000}
+          >
+            <CreateTask />
+          </Modal>
+        </>
+      ),
+      key: "createTask",
+      icon: <PlusOutlined onClick={showDrawer} />,
+    },
+    {
+      label: "Search",
+      key: "search",
+      icon: <SearchOutlined />,
+    },
+  ];
 
   return (
-    <div
-      className="sider-bug"
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-end",
-        backgroundColor: "#001529"
-      }}
-    >
-      <Button
-        // type="primary"
-        onClick={toggleCollapsed}
-        // style={{
-        //   marginBottom: 16,
-        // }}
-      >
-        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-      </Button>
-      <Menu
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
-        mode="inline"
-        theme="dark"
-        inlineCollapsed={collapsed}
-        items={items}
+    <>
+      <div
+        className="sider-bug"
         style={{
-          height: "100%",
-          borderRight: 0,
+          minHeight: "100vh",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-end",
+          backgroundColor: "#001529",
         }}
-      />
-    </div>
+      >
+        <Button onClick={toggleCollapsed}>
+          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        </Button>
+        <Menu
+          defaultSelectedKeys={["createTask"]}
+          defaultOpenKeys={["sub1"]}
+          mode="inline"
+          theme="dark"
+          inlineCollapsed={collapsed}
+          items={items}
+          style={{
+            height: "100%",
+            borderRight: 0,
+          }}
+        />
+      </div>
+    </>
   );
 }

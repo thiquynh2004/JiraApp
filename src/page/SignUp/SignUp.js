@@ -57,82 +57,83 @@ export default function SignUp() {
     },
   });
   return (
-    <div className="register">
-      <h1>Đăng ký</h1>
-
-      <Form
-        onSubmitCapture={formik.handleSubmit}
-        name="basic"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        initialValues={{
-          remember: true,
-        }}
-        autoComplete="true"
-        size="large"
-      >
-        <Form.Item
-          label="Email"
-          rules={[
-            {
-              required: true,
-              message: "Please input your email!",
-              type: "email",
-            },
-          ]}
-        >
-          <Input name="email" onChange={formik.handleChange} />
-          {formik.errors.email && formik.touched.email && (
-            <i className={styles.error}>{formik.errors.email}</i>
-          )}
-        </Form.Item>
-
-        <Form.Item label="Password" hasFeedback={!!formik.errors.passWord}>
-          <Input.Password
-            name="passWord"
-            onChange={formik.handleChange}
-            value={formik.values.passWord}
-          />
-          {formik.errors.passWord && formik.touched.passWord && (
-            <i className={styles.error}>{formik.errors.passWord}</i>
-          )}
-        </Form.Item>
-        <Form.Item label="Name" hasFeedback>
-          <Input
-            name="name"
-            onChange={formik.handleChange}
-            value={formik.values.name}
-          />
-          {formik.errors.name && formik.touched.name && (
-            <i className={styles.error}>{formik.errors.name}</i>
-          )}
-        </Form.Item>
-
-        <Form.Item label="Phone Number" hasFeedback>
-          <Input
-            name="phoneNumber"
-            onChange={formik.handleChange}
-            value={formik.values.phoneNumber}
-          />
-          {formik.errors.phoneNumber && formik.touched.phoneNumber && (
-            <i className={styles.error}>{formik.errors.phoneNumber}</i>
-          )}
-        </Form.Item>
-        <Form.Item
-          wrapperCol={{
-            offset: 8,
-            span: 16,
+    <div className={styles.register}>
+      <div className={styles.registerForm}>
+        <h1>Đăng ký</h1>
+        <Form
+          onSubmitCapture={formik.handleSubmit}
+          name="basic"
+          labelCol={{
+            span: 8,
           }}
+          wrapperCol={{
+            span: 24,
+          }}
+          initialValues={{
+            remember: true,
+          }}
+          autoComplete="true"
+          size="large"
         >
-          <Button type="primary" htmlType="submit">
-            Register
-          </Button>
-        </Form.Item>
-      </Form>
+          <Form.Item
+            label="Email"
+            rules={[
+              {
+                required: true,
+                message: "Please input your email!",
+                type: "email",
+              },
+            ]}
+          >
+            <Input name="email" onChange={formik.handleChange} />
+            {formik.errors.email && formik.touched.email && (
+              <i className={styles.error}>{formik.errors.email}</i>
+            )}
+          </Form.Item>
+
+          <Form.Item label="Password" hasFeedback={!!formik.errors.passWord}>
+            <Input.Password
+              name="passWord"
+              onChange={formik.handleChange}
+              value={formik.values.passWord}
+            />
+            {formik.errors.passWord && formik.touched.passWord && (
+              <i className={styles.error}>{formik.errors.passWord}</i>
+            )}
+          </Form.Item>
+          <Form.Item label="Name" hasFeedback>
+            <Input
+              name="name"
+              onChange={formik.handleChange}
+              value={formik.values.name}
+            />
+            {formik.errors.name && formik.touched.name && (
+              <i className={styles.error}>{formik.errors.name}</i>
+            )}
+          </Form.Item>
+
+          <Form.Item label="Phone Number" hasFeedback>
+            <Input
+              name="phoneNumber"
+              onChange={formik.handleChange}
+              value={formik.values.phoneNumber}
+            />
+            {formik.errors.phoneNumber && formik.touched.phoneNumber && (
+              <i className={styles.error}>{formik.errors.phoneNumber}</i>
+            )}
+          </Form.Item>
+          <Form.Item
+            wrapperCol={{
+              offset: 8,
+              span: 24,
+            }}
+          >
+            <Button type="primary" htmlType="submit">
+              Register
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 }

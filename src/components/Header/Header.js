@@ -1,16 +1,18 @@
-import React, { Fragment } from "react";
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 // import "./header.scss";
 import _ from "lodash";
 import { Button, Modal } from "antd";
 import { FrownOutlined } from "@ant-design/icons";
 import { TOKEN, USER_LOGIN } from "../../util/config";
-import styles from "./header.module.scss"
+import styles from "./header.module.scss";
 
 const { confirm } = Modal;
 
 export default function Header() {
+
   const navigate = useNavigate();
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
   const showLogOutConfirm = () => {
@@ -35,27 +37,53 @@ export default function Header() {
       },
     });
   };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   const operations = (
-    <Fragment>
+    <div>
       {!_.isEmpty(userLogin) ? (
-        <Fragment>
-          <Button
-            // type="primary"
-            size="large"
-            onClick={() => {
-              navigate("/profile");
-            }}
+        <div>
+          <>
+      <Button onClick={showModal}>
+        Hello {userLogin.name}
+      </Button>
+      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+        <p>Some contents...</p>
+      </Modal>
+    </>
+
+          {/* <Modal
+            title="Basic Modal"
+            open={isModalOpen}
+            onOk={handleOk}
+            onCancel={handleCancel}
           >
-            Hello ! {userLogin.name}
-          </Button>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+          </Modal> */}
           <Button type="ghost" size="large" onClick={showLogOutConfirm}>
             Đăng xuất
           </Button>
-        </Fragment>
+        </div>
       ) : (
         ""
       )}
-    </Fragment>
+    </div>
   );
   return (
     <div className={styles.header}>

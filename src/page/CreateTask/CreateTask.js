@@ -318,8 +318,8 @@ export default function CreateTask() {
           </div>
         </Col>
       </Row>
-      <Form.Item>
-        <Button type="primary" htmlType="submit" >
+      <Form.Item style={{display: 'flex', justifyContent:'flex-end'}}>
+        <Button type="primary" htmlType="submit"  style={{marginRight: '0'}}>
           Create Task
         </Button>
       </Form.Item>

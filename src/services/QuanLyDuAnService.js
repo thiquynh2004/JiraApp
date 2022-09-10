@@ -41,5 +41,8 @@ export class QuanLyDuAnService extends baseService {
    updatePriority = (model) => {
     return this.put(`api/Project/updatePriority`,model)
    }
+   updateTimeTracking = (model) => {
+    return this.put(`api/Project/updateTimeTracking`, model)
+   }
 }
 export const quanLyDuAnService = new QuanLyDuAnService();

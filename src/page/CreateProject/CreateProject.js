@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { Editor } from "@tinymce/tinymce-react";
 import { createProjectAction, getProjectCategoryAction } from "../../redux/actions/QuanLyDuAnAction";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 export default function CreateProject() {
   const [componentSize, setComponentSize] = useState("default");
@@ -47,7 +47,7 @@ export default function CreateProject() {
     formik.setFieldValue("description", content);
   };
   return (
-    <>
+    <div className="create-project">
       <h1>Create Project</h1>
       <Form
         labelCol={{
@@ -134,6 +134,7 @@ export default function CreateProject() {
           </Button>
         </Form.Item>
       </Form>
-    </>
+      <Outlet />
+    </div>
   );
 }

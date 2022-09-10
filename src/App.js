@@ -31,12 +31,16 @@ function App() {
           <Route path="/" element={<HomeTemplate />}>
             <Route path="/" element={<ProjectManagement />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/create-project" element={<CreateProject />} />
+            <Route path="/create-project" element={<CreateProject />}>
+{/* <Route index element={<ProjectManagement />} /> */}
+            </Route>
             <Route path="/project-management" element={<ProjectManagement />} />
             <Route
               path="/project-management/edit/:projectId"
               element={<EditProject />}
-            />
+            >
+              
+            </Route>
             <Route path="/project-detail/:id" element={<ProjectDetail />} />
             <Route path="/create-task" element={<CreateTask />} />
           </Route>

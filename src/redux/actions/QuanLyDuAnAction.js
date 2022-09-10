@@ -31,18 +31,14 @@ export const createProjectAction = (formData) => {
       // dispatch(displayLoadingAction)
       const result = await quanLyDuAnService.createProject(formData);
       if (result.data.statusCode === 200) {
-
         openNotificationWithIcon("success", "Create project successfully");
         await dispatch(getAllProjectAction());
-     
       } else {
-    
         openNotificationWithIcon("error", "Create project failed");
       }
-    
+
       console.log("result", result.data.content);
     } catch (error) {
-     
       openNotificationWithIcon(
         "error",
         "Create project failed",
@@ -92,22 +88,28 @@ export const getProjectDetailAction = (id) => {
   };
 };
 
-//Chưa update được đây neee
+//fix update duoc r neee
 export const updateProjectAction = (projectId, formData) => {
   return async (dispatch) => {
     try {
+      // dispatch(displayLoadingAction);
       const result = await quanLyDuAnService.updateProject(projectId, formData);
-      if(result.data.statusCode === 200) {
+      if (result.data.statusCode === 200) {
         openNotificationWithIcon("success", "Project is updated successfully");
         dispatch(getAllProjectAction());
-      }else{
+        // dispatch(hideLoadingAction);
+      } else {
         openNotificationWithIcon("error", "Update project failed");
       }
-      
-      
+      // dispatch(hideLoadingAction);
+
       console.log("result", result.data.content);
     } catch (error) {
-      openNotificationWithIcon("error", "Update project failed", error.response?.data.message);
+      openNotificationWithIcon(
+        "error",
+        "Update project failed",
+        error.response?.data.message
+      );
       console.log("error", error.response?.data);
     }
   };
@@ -225,6 +227,7 @@ export const updatePriorityAction = (model) => {
       const result = await quanLyDuAnService.updatePriority(model);
       if (result.data.statusCode === 200) {
         openNotificationWithIcon("success", "Priority updated successfully");
+        dispatch(getTaskDetailAction(model.taskId))
       }
       console.log("priority", result);
     } catch (error) {
@@ -237,4 +240,21 @@ export const updatePriorityAction = (model) => {
   };
 };
 
-//  export const update
+ export const updateTimeTrackingAction = (model) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyDuAnService.updateTimeTracking(model);
+      if (result.data.statusCode === 200){
+        openNotificationWithIcon("success","Update successfully")
+        dispatch(getTaskDetailAction(model.taskId));
+      }
+      else{
+        openNotificationWithIcon("error", "Update is failed")
+      }
+      console.log(result);
+    } catch (error) {
+      openNotificationWithIcon("error", "Update is failed", error.response?.data.content)
+      console.error("error", error.response?.data)
+    }
+  }
+ }

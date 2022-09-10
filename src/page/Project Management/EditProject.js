@@ -8,8 +8,9 @@ import {
   getProjectDetailAction,
   updateProjectAction,
 } from "../../redux/actions/QuanLyDuAnAction";
-import { useNavigate, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { useFormik } from "formik";
+
 
 
 export default function EditProject(props) {
@@ -40,7 +41,9 @@ export default function EditProject(props) {
     },
     onSubmit: async(values) =>{
       console.log("values", values);
+   
       dispatch(updateProjectAction(projectId, values));
+ 
       setTimeout(() => {
         navigate("/project-management")
      }, 3000)
@@ -71,6 +74,7 @@ export default function EditProject(props) {
             <Form.Item label="Project Category">
               <Select
                 defaultValue={projectDetail?.projectCategory?.id}
+                value={projectDetail?.projectCategory?.id}
                 name="categoryId"
                 options={arrProjectCategory?.map((pjCategory, index) => ({
                   label: pjCategory.projectCategoryName,
@@ -136,6 +140,7 @@ export default function EditProject(props) {
           </Col>
         </Row>
       </Form>
+      <Outlet/>
     </div>
   );
 }

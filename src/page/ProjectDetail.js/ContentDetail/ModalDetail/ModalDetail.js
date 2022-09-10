@@ -10,6 +10,7 @@ import {
   List,
   Select,
   Slider,
+  Modal,
 } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,13 +28,12 @@ import { Link } from "react-router-dom";
 import { getAllStatusAction } from "../../../../redux/actions/QuanLyStatusAction";
 import {
   getProjectDetailAction,
-  getTaskDetailAction,
   updatePriorityAction,
   updateStatusAction,
+  updateTimeTrackingAction,
 } from "../../../../redux/actions/QuanLyDuAnAction";
 import { getAllPriorityAction } from "../../../../redux/actions/QuanLyPriorityAction";
 import { getAllTaskAction } from "../../../../redux/actions/QuanLyTaskAction";
-import { CHANGE_VALUE_MODAL } from "../../../../redux/actions/types/QuanLyDuAnType";
 
 const { TextArea } = Input;
 
@@ -78,7 +78,7 @@ export default function ModalDetail() {
   const { priorityList } = useSelector((state) => state.QuanLyPriorityReducer);
   const { taskList } = useSelector((state) => state.QuanLyTaskReducer);
   const dispatch = useDispatch();
-  console.log("taskDetail", taskDetail);
+  // console.log("taskDetail", taskDetail);
   // console.log("arrStatus", arrStatus);
   // console.log("projectDetail", projectDetail);
   // console.log("priorityList", priorityList);
@@ -87,6 +87,10 @@ export default function ModalDetail() {
   //   arrStatus,
   //   priorityList,
   // });
+  const [timeTracking, setTimeTracking] = useState({
+    timeTrackingSpent: 0,
+    timeTrackingRemaining: 0,
+  });
   const [submitting, setSubmitting] = useState(false);
   const [value, setValue] = useState("");
 
@@ -139,18 +143,40 @@ export default function ModalDetail() {
     dispatch(getAllTaskAction());
   }, []);
 
-  // useEffect(() => {
-  //   dispatch(getAllPriorityAction());
-  // }, []);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // const handleOk = (e) => {
+  //   dispatch(updateTimeTrackingAction(e));
+  //   setIsModalOpen(false);
+  // };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+  const handleChangeTime = (e) => {
+    const model = {
+      taskId: taskDetail.taskId,
+      timeTrackingSpent: timeTracking.timeTrackingSpent,
+      timeTrackingRemaining: timeTracking.timeTrackingRemaining,
+    };
+    console.log("MODEL DATA", model);
+    dispatch(updateTimeTrackingAction(model));
+    setIsModalOpen(false);
+  };
   return (
     <div className="modal-detail">
       <Row>
         <Col span={16} style={{ padding: "0 10px" }}>
           <p>
-            <BookOutlined />{taskDetail.taskName}
+            <BookOutlined />
+            {taskDetail.taskName}
           </p>
-          <Select 
-          style={{width: "40%"}}
+          <Select
+            style={{ width: "40%" }}
             value={taskDetail.typeId}
             name="typeId"
             options={taskList?.map((task, index) => ({
@@ -281,18 +307,20 @@ export default function ModalDetail() {
             <h4>
               <ClockCircleOutlined /> Time Tracking
             </h4>
+            <div onClick={showModal}>
+              <Slider
+                defaultValue={Number(taskDetail.timeTrackingSpent)}
+                value={Number(taskDetail.timeTrackingSpent)}
+                max={
+                  Number(taskDetail.timeTrackingSpent) +
+                  Number(taskDetail.timeTrackingRemaining)
+                }
+                tooltip={{
+                  open: true,
+                }}
+              />
+            </div>
 
-            <Slider
-              defaultValue={Number(taskDetail.timeTrackingSpent)}
-              value={Number(taskDetail.timeTrackingSpent)}
-              max={
-                Number(taskDetail.timeTrackingSpent) +
-                Number(taskDetail.timeTrackingRemaining)
-              }
-              tooltip={{
-                open: true,
-              }}
-            />
             <div
               style={{
                 display: "flex",
@@ -302,6 +330,47 @@ export default function ModalDetail() {
             >
               <h5>{Number(taskDetail.timeTrackingSpent)}h logged</h5>
               <h5>{Number(taskDetail.timeTrackingRemaining)}h remaining</h5>
+
+              <Modal
+                title="Basic Modal"
+                open={isModalOpen}
+                onOk={handleChangeTime}
+                onCancel={handleCancel}
+              >
+                <Row gutter={16}>
+                  <Col span={12}>
+                    <p>Time Spent</p>
+                    <Input
+                      name="timeTrackingSpent"
+                      type="number"
+                      onChange={(e) => {
+                        console.log("e", e);
+
+                        setTimeTracking({
+                          ...timeTracking,
+                          timeTrackingSpent: e.target.value,
+                        });
+                        setValue("timeTrackingSpent", e.target.value);
+                      }}
+                    />
+                  </Col>
+                  <Col span={12}>
+                    <p>Time remaining</p>
+                    <Input
+                      name="timeTrackingRemaining"
+                      type="number"
+                      onChange={(e) => {
+                        console.log("e", e.target.value);
+                        setTimeTracking({
+                          ...timeTracking,
+                          timeTrackingRemaining: e.target.value,
+                        });
+                        setValue("timeTrackingRemaining", e.target.value);
+                      }}
+                    />
+                  </Col>
+                </Row>
+              </Modal>
             </div>
           </div>
           <div>

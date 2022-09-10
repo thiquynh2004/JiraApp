@@ -35,13 +35,6 @@ export default function CreateProject() {
     onSubmit: async (values) => {
       console.log("values", values);
       dispatch(createProjectAction(values));
-      message.success({
-        content: "Bạn đã tạo thành công rồi nhé",
-        className: "message",
-        style:{
-          marginTop: '10vh',
-        }
-      })
       setTimeout(() => {
         navigate("/project-management")
      }, 3000)

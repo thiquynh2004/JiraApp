@@ -22,6 +22,7 @@ export default function CreateTask() {
     timeTrackingSpent: 0,
     timeTrackingRemaining: 0,
   });
+
   const [componentSize, setComponentSize] = useState("default");
   const dispatch = useDispatch();
 
@@ -60,6 +61,7 @@ export default function CreateTask() {
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };
+
   const editorRef = useRef(null);
 
   const userOption = arrUserByProjects.map((user, index) => {
@@ -90,7 +92,9 @@ export default function CreateTask() {
     onSubmit: (values) => {
       console.log("values", values);
       dispatch(createTaskAction(values));
+     
     },
+    
   });
 
   const handleChangeSelectProject = (idProject) => {
@@ -114,6 +118,8 @@ export default function CreateTask() {
   const handleChangeSelectStatus = (value) => {
     formik.setFieldValue("statusId", value);
   };
+
+  // }
   return (
     <Form
       labelCol={{
@@ -313,7 +319,7 @@ export default function CreateTask() {
         </Col>
       </Row>
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" >
           Create Task
         </Button>
       </Form.Item>

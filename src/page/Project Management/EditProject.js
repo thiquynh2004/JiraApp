@@ -40,20 +40,10 @@ export default function EditProject(props) {
     },
     onSubmit: async(values) =>{
       console.log("values", values);
-      dispatch(updateProjectAction(values));
-      message.success(
-        {
-          content: "Project is updated successfully",
-          className: "message",
-          style: {
-            marginTop: "10vh",
-            fontSize: "20px",
-          },
-        },
-        setTimeout(() => {
-          navigate("/project-management")
-        }, 3000)
-      );
+      dispatch(updateProjectAction(projectId, values));
+      setTimeout(() => {
+        navigate("/project-management")
+     }, 3000)
     }
 
   })

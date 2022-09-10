@@ -15,31 +15,35 @@ import ProjectDetail from "./page/ProjectDetail.js/ProjectDetail";
 import CreateTask from "./page/CreateTask/CreateTask";
 import Profile from "./page/Profile/Profile";
 // import Modall from "./components/Modal/Modall";
-import { createBrowserHistory } from 'history';
+import { createBrowserHistory } from "history";
+import Loading from "./components/Loading/Loading";
 
 export const history = createBrowserHistory();
 function App() {
   return (
-    <Routes history={history}>
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<SignUp />} />
+    <>
+      <Loading />
+      <Routes history={history}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
 
-      <Route element={<ProtectedRoute />}>
-        <Route path="/" element={<HomeTemplate />}>
-          <Route path="/" element={<ProjectManagement />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/create-project" element={<CreateProject />} />
-          <Route path="/project-management" element={<ProjectManagement />} />
-          <Route
-            path="/project-management/edit/:projectId"
-            element={<EditProject />}
-          />
-          <Route path="/project-detail/:id" element={<ProjectDetail />} />
-          <Route path="/create-task" element={<CreateTask />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<HomeTemplate />}>
+            <Route path="/" element={<ProjectManagement />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/create-project" element={<CreateProject />} />
+            <Route path="/project-management" element={<ProjectManagement />} />
+            <Route
+              path="/project-management/edit/:projectId"
+              element={<EditProject />}
+            />
+            <Route path="/project-detail/:id" element={<ProjectDetail />} />
+            <Route path="/create-task" element={<CreateTask />} />
+          </Route>
         </Route>
-      </Route>
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </>
   );
 }
 

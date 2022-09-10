@@ -78,7 +78,7 @@ export default function ModalDetail() {
   const { priorityList } = useSelector((state) => state.QuanLyPriorityReducer);
   const { taskList } = useSelector((state) => state.QuanLyTaskReducer);
   const dispatch = useDispatch();
-  // console.log("taskDetail", taskDetail);
+  console.log("taskDetail", taskDetail);
   // console.log("arrStatus", arrStatus);
   // console.log("projectDetail", projectDetail);
   // console.log("priorityList", priorityList);
@@ -111,15 +111,10 @@ export default function ModalDetail() {
   const handleChange = (e) => {};
 
   const handleChangeSelectStatus = (e) => {
-    const {name, value} = e;
     const contentStatus = {
       taskId: taskDetail.taskId,
       statusId: e,
     };
-    dispatch({
-      type: CHANGE_VALUE_MODAL,
-      name, value,
-    })
     dispatch(updateStatusAction(contentStatus));
     dispatch(getProjectDetailAction(projectDetail.id));
   };
@@ -152,9 +147,10 @@ export default function ModalDetail() {
       <Row>
         <Col span={16} style={{ padding: "0 10px" }}>
           <p>
-            <BookOutlined />
+            <BookOutlined />{taskDetail.taskName}
           </p>
-          <Select
+          <Select 
+          style={{width: "40%"}}
             value={taskDetail.typeId}
             name="typeId"
             options={taskList?.map((task, index) => ({

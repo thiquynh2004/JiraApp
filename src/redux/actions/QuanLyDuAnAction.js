@@ -1,7 +1,7 @@
 import { quanLyDuAnService } from "../../services/QuanLyDuAnService";
 import { openNotificationWithIcon } from "../types/notificationJira";
+import { displayLoadingAction, hideLoadingAction } from "./LoadingAction";
 import {
-  CHANGE_VALUE_MODAL,
   SET_GET_ALL_PROJECTS,
   SET_GET_PROJECT_CATEGORY,
   SET_GET_PROJECT_DETAIL,
@@ -28,16 +28,27 @@ export const getProjectCategoryAction = (project) => {
 export const createProjectAction = (formData) => {
   return async (dispatch) => {
     try {
+      // dispatch(displayLoadingAction)
       const result = await quanLyDuAnService.createProject(formData);
-      if(result.data.statusCode === 200){
-        openNotificationWithIcon('success', "Create project successfully");
+      if (result.data.statusCode === 200) {
+
+        openNotificationWithIcon("success", "Create project successfully");
+        await dispatch(getAllProjectAction());
+     
+      } else {
+    
+        openNotificationWithIcon("error", "Create project failed");
       }
-      else {
-        openNotificationWithIcon('error', "Create project failed");
-      }
+    
       console.log("result", result.data.content);
     } catch (error) {
-        openNotificationWithIcon('error', "Create project failed", error.response?.data);
+     
+      openNotificationWithIcon(
+        "error",
+        "Create project failed",
+        error.response?.data
+      );
+      // dispatch(hideLoadingAction)
       console.log("error", error.response?.data);
     }
   };
@@ -46,15 +57,21 @@ export const createProjectAction = (formData) => {
 export const getAllProjectAction = () => {
   return async (dispatch) => {
     try {
+      // dispatch(displayLoadingAction);
       const result = await quanLyDuAnService.getAllProject();
-      dispatch({
-        type: SET_GET_ALL_PROJECTS,
-        projectList: result.data.content,
-      });
-      const idProject = result.data.content.id;
-      dispatch(getUserByProjectAction(idProject));
+      if (result.data.statusCode === 200) {
+        await dispatch({
+          type: SET_GET_ALL_PROJECTS,
+          projectList: result.data.content,
+        });
+        const idProject = result.data.content.id;
+        dispatch(getUserByProjectAction(idProject));
+        // dispatch(hideLoadingAction);
+      }
+      // dispatch(hideLoadingAction);
       console.log("result", result);
     } catch (error) {
+      // await dispatch(hideLoadingAction);
       console.log("error", error.response?.data);
     }
   };
@@ -76,13 +93,21 @@ export const getProjectDetailAction = (id) => {
 };
 
 //Chưa update được đây neee
-export const updateProjectAction = (formData) => {
+export const updateProjectAction = (projectId, formData) => {
   return async (dispatch) => {
     try {
-      const result = await quanLyDuAnService.updateProject(formData);
-      dispatch(getAllProjectAction());
+      const result = await quanLyDuAnService.updateProject(projectId, formData);
+      if(result.data.statusCode === 200) {
+        openNotificationWithIcon("success", "Project is updated successfully");
+        dispatch(getAllProjectAction());
+      }else{
+        openNotificationWithIcon("error", "Update project failed");
+      }
+      
+      
       console.log("result", result.data.content);
     } catch (error) {
+      openNotificationWithIcon("error", "Update project failed", error.response?.data.message);
       console.log("error", error.response?.data);
     }
   };
@@ -92,19 +117,17 @@ export const deleteProjectAction = (projectId) => {
   return async (dispatch) => {
     try {
       const result = await quanLyDuAnService.deleteProject(projectId);
-      if(result.data.statusCode === 200){
-        openNotificationWithIcon('success', 'Delete project successfully')
+      if (result.data.statusCode === 200) {
+        openNotificationWithIcon("success", "Delete project successfully");
+      } else {
+        openNotificationWithIcon("error", "Delete project failed");
       }
-      else{
-        openNotificationWithIcon('error', 'Delete project failed')
-      }
-      
+
       dispatch(getAllProjectAction());
       console.log("result", result);
     } catch (error) {
-        openNotificationWithIcon('error', 'Delete project failed')
+      openNotificationWithIcon("error", "Delete project failed");
       console.log("error", error.response?.data);
-      
     }
   };
 };
@@ -136,17 +159,25 @@ export const removeUserFromProjectAction = (userProject) => {
 export const createTaskAction = (formData) => {
   return async (dispatch) => {
     try {
+      // dispatch(displayLoadingAction);
       const result = await quanLyDuAnService.createTask(formData);
-      if(result.data.statusCode === 200){
-        openNotificationWithIcon('success', 'Create Task Successfully')
-        dispatch(getProjectDetailAction(formData.projectId))
+      if (result.data.statusCode === 200) {
+        // dispatch(hideLoadingAction);
+        openNotificationWithIcon("success", "Create Task Successfully");
+        dispatch(getProjectDetailAction(formData.projectId));
+      } else {
+        // dispatch(hideLoadingAction);
+        openNotificationWithIcon("error", "Create task failed");
       }
-      else{
-        openNotificationWithIcon('error', 'Create task failed')
-      }
+      // dispatch(hideLoadingAction);
       console.log("result", result);
     } catch (error) {
-        openNotificationWithIcon('error', 'Create task failed', error.response?.data.message)
+      openNotificationWithIcon(
+        "error",
+        "Create task failed",
+        error.response?.data.message
+      );
+
       console.log("error", error.response?.data);
     }
   };
@@ -171,31 +202,39 @@ export const updateStatusAction = (contentStatus) => {
   return async (dispatch) => {
     try {
       const result = await quanLyDuAnService.updateStatus(contentStatus);
-      if(result.data.statusCode === 200){
-        openNotificationWithIcon('success', 'Status is updated successfully')
-      }
-      else{
-        openNotificationWithIcon('error', 'Status is updated failed')
+      if (result.data.statusCode === 200) {
+        openNotificationWithIcon("success", "Status is updated successfully");
+      } else {
+        openNotificationWithIcon("error", "Status is updated failed");
       }
       // console.log("hihi", result);
     } catch (error) {
-      openNotificationWithIcon('error', 'Status is updated failed', error.response?.data.message)
+      openNotificationWithIcon(
+        "error",
+        "Status is updated failed",
+        error.response?.data.message
+      );
       console.log("error", error.response?.data);
     }
   };
 };
 
-
- export const updatePriorityAction = (model) => {
+export const updatePriorityAction = (model) => {
   return async (dispatch) => {
     try {
       const result = await quanLyDuAnService.updatePriority(model);
-      if(result.data.statusCode === 200){
-        openNotificationWithIcon('success',"Priority updated successfully");
+      if (result.data.statusCode === 200) {
+        openNotificationWithIcon("success", "Priority updated successfully");
       }
-      console.log('priority',result);
+      console.log("priority", result);
     } catch (error) {
-      openNotificationWithIcon('error', 'Priority is updated failed', error.response?.data.content)
+      openNotificationWithIcon(
+        "error",
+        "Priority is updated failed",
+        error.response?.data.content
+      );
     }
-  }
- }
+  };
+};
+
+//  export const update

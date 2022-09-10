@@ -24,6 +24,7 @@ import {
 } from "../../redux/actions/QuanLyDuAnAction";
 import { NavLink } from "react-router-dom";
 import { getUsersAction } from "../../redux/actions/types/QuanLyNguoiDungAction";
+import { displayLoadingAction } from "../../redux/actions/LoadingAction";
 
 const { confirm } = Modal;
 const { Option } = AutoComplete;
@@ -36,6 +37,7 @@ export default function ProjectManagement(props) {
   console.log("projectList", projectList);
   const dispatch = useDispatch();
   useEffect(() => {
+
     dispatch(getAllProjectAction());
   }, []);
   const [sortedInfo, setSortedInfo] = useState({});

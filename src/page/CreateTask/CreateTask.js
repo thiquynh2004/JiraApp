@@ -326,3 +326,26 @@ export default function CreateTask() {
     </Form>
   );
 }
+
+
+
+{/* <Form.Item>
+              <Select
+                value={taskDetail.statusId}
+                name="statusId"
+                options={arrStatus?.map((status, index) => ({
+                  label: status.statusName,
+                  value: status.statusId,
+                }))}
+                onChange={handleChangeSelectStatus}
+              ></Select>
+            </Form.Item> */}
+
+            // const handleChangeSelectStatus = (e) => {
+            //   const contentStatus = {
+            //     taskId: taskDetail.taskId,
+            //     statusId: e,
+            //   };
+            //   dispatch(updateStatusAction(contentStatus));
+            //   dispatch(getProjectDetailAction(projectDetail.id));
+            // };

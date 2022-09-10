@@ -128,7 +128,7 @@ export default function ModalDetail() {
       taskId: taskDetail.taskId,
       priorityId: e,
     };
-    console.log("model", e);
+    // console.log("model", e);
     dispatch(updatePriorityAction(model));
     dispatch(getProjectDetailAction(projectDetail.id));
   };
@@ -148,12 +148,6 @@ export default function ModalDetail() {
   const showModal = () => {
     setIsModalOpen(true);
   };
-
-  // const handleOk = (e) => {
-  //   dispatch(updateTimeTrackingAction(e));
-  //   setIsModalOpen(false);
-  // };
-
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -238,7 +232,6 @@ export default function ModalDetail() {
             <h4>STATUS </h4>
             <Form.Item>
               <Select
-                // defaultValue={taskDetail?.statusId}
                 value={taskDetail.statusId}
                 name="statusId"
                 options={arrStatus?.map((status, index) => ({

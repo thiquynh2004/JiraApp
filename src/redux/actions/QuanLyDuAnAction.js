@@ -206,6 +206,7 @@ export const updateStatusAction = (contentStatus) => {
       const result = await quanLyDuAnService.updateStatus(contentStatus);
       if (result.data.statusCode === 200) {
         openNotificationWithIcon("success", "Status is updated successfully");
+        dispatch(getTaskDetailAction(contentStatus.taskId));
       } else {
         openNotificationWithIcon("error", "Status is updated failed");
       }
@@ -227,7 +228,7 @@ export const updatePriorityAction = (model) => {
       const result = await quanLyDuAnService.updatePriority(model);
       if (result.data.statusCode === 200) {
         openNotificationWithIcon("success", "Priority updated successfully");
-        dispatch(getTaskDetailAction(model.taskId))
+        dispatch(getTaskDetailAction(model.taskId));
       }
       console.log("priority", result);
     } catch (error) {
@@ -240,21 +241,24 @@ export const updatePriorityAction = (model) => {
   };
 };
 
- export const updateTimeTrackingAction = (model) => {
+export const updateTimeTrackingAction = (model) => {
   return async (dispatch) => {
     try {
       const result = await quanLyDuAnService.updateTimeTracking(model);
-      if (result.data.statusCode === 200){
-        openNotificationWithIcon("success","Update successfully")
+      if (result.data.statusCode === 200) {
+        openNotificationWithIcon("success", "Update successfully");
         dispatch(getTaskDetailAction(model.taskId));
-      }
-      else{
-        openNotificationWithIcon("error", "Update is failed")
+      } else {
+        openNotificationWithIcon("error", "Update is failed");
       }
       console.log(result);
     } catch (error) {
-      openNotificationWithIcon("error", "Update is failed", error.response?.data.content)
-      console.error("error", error.response?.data)
+      openNotificationWithIcon(
+        "error",
+        "Update is failed",
+        error.response?.data.content
+      );
+      console.error("error", error.response?.data);
     }
-  }
- }
+  };
+};

@@ -1,0 +1,12 @@
+.siderBug{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    background-color: "#001529";
+    
+    button{
+        width: 100%;
+    }
+}

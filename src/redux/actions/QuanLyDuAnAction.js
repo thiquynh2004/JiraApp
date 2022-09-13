@@ -1,6 +1,6 @@
 import { quanLyDuAnService } from "../../services/QuanLyDuAnService";
 import { openNotificationWithIcon } from "../types/notificationJira";
-import { displayLoadingAction, hideLoadingAction } from "./LoadingAction";
+// import { displayLoadingAction, hideLoadingAction } from "./LoadingAction";
 import {
   SET_GET_ALL_PROJECTS,
   SET_GET_PROJECT_CATEGORY,
@@ -262,3 +262,38 @@ export const updateTimeTrackingAction = (model) => {
     }
   };
 };
+
+export const updateDescriptionAction = (model) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyDuAnService.updateDescription(model);
+      if (result.data.statusCode === 200) {
+        openNotificationWithIcon("success", "Updated description successfully");
+        dispatch(getTaskDetailAction(model.taskId));
+      }
+      console.log("description", result)
+      
+    } catch (error) {
+      openNotificationWithIcon("error", "Update description failed", error.response?.data.content)
+      console.error("error", error.response?.data)
+    }
+  }
+}
+
+export const updateAssignUserTaskAction = (model) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyDuAnService.updateAssignUserTask(model)
+      if(result.data.statusCode === 200){
+        openNotificationWithIcon("success", "Update successfully")
+      }else{ 
+        openNotificationWithIcon('error', "Update failed");
+        dispatch(getTaskDetailAction(model.taskId));
+      }
+      console.log("arrAssign", result)
+    } catch (error) {
+      openNotificationWithIcon('error', error.response?.data.content)
+      console.error("error", error.response?.data)
+    }
+  }
+}

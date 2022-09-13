@@ -5,14 +5,13 @@ import { NavLink, useNavigate } from "react-router-dom";
 // import "./header.scss";
 import _ from "lodash";
 import { Button, Modal } from "antd";
-import { FrownOutlined } from "@ant-design/icons";
+import { FrownOutlined, LogoutOutlined } from "@ant-design/icons";
 import { TOKEN, USER_LOGIN } from "../../util/config";
 import styles from "./header.module.scss";
 
 const { confirm } = Modal;
 
 export default function Header() {
-
   const navigate = useNavigate();
   const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
   const showLogOutConfirm = () => {
@@ -56,28 +55,20 @@ export default function Header() {
       {!_.isEmpty(userLogin) ? (
         <div>
           <>
-      <Button onClick={showModal}>
-        Hello {userLogin.name}
-      </Button>
-      <Modal title="Basic Modal" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-      </Modal>
-    </>
-
-          {/* <Modal
-            title="Basic Modal"
-            open={isModalOpen}
-            onOk={handleOk}
-            onCancel={handleCancel}
-          >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-          </Modal> */}
+            <Button  type="dashed"  size="large" onClick={showModal}>Hello {userLogin.name}</Button>
+            <Modal
+              title="Basic Modal"
+              open={isModalOpen}
+              onOk={handleOk}
+              onCancel={handleCancel}
+            >
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+              <p>Some contents...</p>
+            </Modal>
+          </>
           <Button type="ghost" size="large" onClick={showLogOutConfirm}>
-            Đăng xuất
+            Đăng xuất <LogoutOutlined />
           </Button>
         </div>
       ) : (

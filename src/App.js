@@ -14,16 +14,13 @@ import EditProject from "./page/Project Management/EditProject";
 import ProjectDetail from "./page/ProjectDetail.js/ProjectDetail";
 import CreateTask from "./page/CreateTask/CreateTask";
 import Profile from "./page/Profile/Profile";
-// import Modall from "./components/Modal/Modall";
-import { createBrowserHistory } from "history";
-import Loading from "./components/Loading/Loading";
 
-export const history = createBrowserHistory();
+import Loading from "./components/Loading/Loading";
 function App() {
   return (
     <>
       <Loading />
-      <Routes history={history}>
+      <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
 

@@ -24,7 +24,7 @@ import {
 } from "../../redux/actions/QuanLyDuAnAction";
 import { NavLink } from "react-router-dom";
 import { getUsersAction } from "../../redux/actions/types/QuanLyNguoiDungAction";
-import { displayLoadingAction } from "../../redux/actions/LoadingAction";
+// import { displayLoadingAction } from "../../redux/actions/LoadingAction";
 
 const { confirm } = Modal;
 const { Option } = AutoComplete;

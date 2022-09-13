@@ -1,0 +1,23 @@
+.comment{
+    .listComment{
+        .contentComment{
+            .action{
+                margin-top:-12px;
+                padding: 0 30px;
+                display: flex;
+                span{
+                    padding: 0 8px;
+                    cursor: pointer;
+                    margin: 0 8px;;
+                    font-size:14px;
+                    color: rgb(196, 195, 190);
+
+                    &:hover{
+                        color: rgb(11, 245, 61);
+                    }
+                }
+                
+            }
+        }
+    }
+}

@@ -1,13 +1,13 @@
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
+   DoubleLeftOutlined,
+  DoubleRightOutlined,
   PlusOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
 import { Button, Menu, Modal } from "antd";
 import React, { useState } from "react";
 import CreateTask from "../../page/CreateTask/CreateTask";
-
+import styles from './sider.module.scss'
 
 export default function SiderBug() {
   const [collapsed, setCollapsed] = useState(false);
@@ -53,17 +53,11 @@ export default function SiderBug() {
   return (
     <>
       <div
-        className="sider-bug"
-        style={{
-          minHeight: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-end",
-          backgroundColor: "#001529",
-        }}
+        className={styles.siderBug}
+       
       >
         <Button onClick={toggleCollapsed}>
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          {collapsed ? <DoubleLeftOutlined /> : <DoubleRightOutlined />}
         </Button>
         <Menu
           defaultSelectedKeys={["createTask"]}

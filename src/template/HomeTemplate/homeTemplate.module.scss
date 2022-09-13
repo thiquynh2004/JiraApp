@@ -1,5 +1,13 @@
 .homeTemplate{
   display:flex;
+  .logo{
+    background-color: #40e0d0;
+    img{
+      width: 60%;
+      margin-left: 20%;
+      height: auto;
+    }
+  }
 }
 
 #components-layout-demo-custom-trigger .trigger {

@@ -1,13 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {} from "@ant-design/icons";
-import { Layout, Menu } from "antd";
+import { Image, Layout, Menu } from "antd";
 import React from "react";
 import { Outlet} from "react-router-dom";
 import { useSelector } from "react-redux";
 import Header from "../../components/Header/Header";
 import { menuItems } from "./MenuItems";
 import SiderBug from "../../components/Sider/SiderBug";
-import styles from "./homeTemplate.module.scss"
+
+import logoJira from '../../asset/image/LogoJira.png'
+import styles from "./homeTemplate.module.scss";
 const { Content, Sider } = Layout;
 
 export default function HomeTemplate() {
@@ -21,8 +23,8 @@ export default function HomeTemplate() {
       }}
     >
       <Sider>
-        <div className="logo" style={{ color: "white" }}>
-          hihih
+        <div className={styles.logo}>
+         <Image src={logoJira} alt ='logo-jira'/>
         </div>
         <Menu
           theme="default"

@@ -1,4 +1,4 @@
-import { history } from "../../../App";
+// import { history } from "../../../App";
 import { quanLyNguoiDungService } from "../../../services/QuanLyNguoiDungService"
 import { openNotificationWithIcon } from "../../types/notificationJira";
 import { DANG_NHAP_ACTION, SET_GET_LIST_USERS, SET_GET_USER_BY_PROJECT } from "./QuanLyNguoiDungType";
@@ -13,10 +13,9 @@ export const dangNhapAction =(thongTinDangNhap) => {
                     thongTinDangNhap: result.data.content
                 })
                 openNotificationWithIcon('success', 'Login successfully')
-                history.push("/")
             }
             else{
-                openNotificationWithIcon('error','Login failed')
+                openNotificationWithIcon('error','Login failed' )
             }
             console.log(result);
         } catch (error) {

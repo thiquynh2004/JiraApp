@@ -5,6 +5,8 @@ import {QuanLyTaskReducer} from "../reducers/QuanLyTaskReducer"
 import {QuanLyPriorityReducer} from "../reducers/QuanLyPriorityReducer"
 import {QuanLyStatusReducer} from "../reducers/QuanLyStatusReducer"
 import {LoadingReducer} from "../reducers/LoadingReducer"
+import {QuanLyCommentReducer} from "../reducers/QuanLyCommentReducer"
+// import {QuanLyCommentReducer} from "../reducers/QuanLyCommentReducer"
 const store = configureStore({ 
     reducer:{
         QuanLyNguoiDungReducer,
@@ -12,7 +14,9 @@ const store = configureStore({
         QuanLyTaskReducer,
         QuanLyPriorityReducer,
         QuanLyStatusReducer,
-        LoadingReducer
+        LoadingReducer,
+        QuanLyCommentReducer,
+        // QuanLyCommentReducer,
     }
 });
 export default store;

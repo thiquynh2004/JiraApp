@@ -236,7 +236,7 @@ export default function CreateTask() {
             style={{ marginBottom: "20px ", paddingRight: "40px" }}
           >
             <p style={{ marginRight: "12px" }}>Assignees:</p>
-            {/* <Form.Item label="Assignees"> */}
+        
             <Select
               // defaultValue={userOption}
               mode="multiple"
@@ -328,24 +328,3 @@ export default function CreateTask() {
 }
 
 
-
-{/* <Form.Item>
-              <Select
-                value={taskDetail.statusId}
-                name="statusId"
-                options={arrStatus?.map((status, index) => ({
-                  label: status.statusName,
-                  value: status.statusId,
-                }))}
-                onChange={handleChangeSelectStatus}
-              ></Select>
-            </Form.Item> */}
-
-            // const handleChangeSelectStatus = (e) => {
-            //   const contentStatus = {
-            //     taskId: taskDetail.taskId,
-            //     statusId: e,
-            //   };
-            //   dispatch(updateStatusAction(contentStatus));
-            //   dispatch(getProjectDetailAction(projectDetail.id));
-            // };

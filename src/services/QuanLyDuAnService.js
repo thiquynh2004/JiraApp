@@ -44,5 +44,11 @@ export class QuanLyDuAnService extends baseService {
    updateTimeTracking = (model) => {
     return this.put(`api/Project/updateTimeTracking`, model)
    }
+   updateDescription = (model) => {
+    return this.put(`api/Project/updateDescription`, model);
+   }
+   updateAssignUserTask = (model) => {
+    return this.post(`api/Project/assignUserTask`, model)
+   }
 }
 export const quanLyDuAnService = new QuanLyDuAnService();

@@ -113,7 +113,12 @@ export default function Login() {
                 span: 16,
               }}
             >
-              <Button type="primary" htmlType="submit">
+              <Button type="primary" htmlType="submit" onClick={() => {
+                setTimeout(() => {
+                  navigate("/")
+                }, 2000)
+                
+              }} >
                 Login
               </Button>
             </Form.Item>

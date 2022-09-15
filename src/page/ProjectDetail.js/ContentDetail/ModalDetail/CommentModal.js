@@ -7,9 +7,9 @@ import {
   Popconfirm,
   Tooltip,
 } from "antd";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Editor } from "@tinymce/tinymce-react";
+// import { Editor } from "@tinymce/tinymce-react";
 import {
   deleteCommentAction,
   getAllCommentAction,
@@ -26,7 +26,7 @@ export default function CommentModal(props) {
   console.log("taskDetail", taskDetail);
   console.log("listComment", listComment);
   const dispatch = useDispatch();
-  const editorRef = useRef(null);
+  // const editorRef = useRef(null);
   const [comments, setComments] = useState({
     contentComment: "",
   });
@@ -56,7 +56,7 @@ export default function CommentModal(props) {
     console.log("commentChange", e.target.value);
     // setValueComment("contentComment", e.target.value);
   };
-  
+
   return (
     <div className={styles.comment}>
       {/* render ra comment */}
@@ -106,9 +106,9 @@ export default function CommentModal(props) {
               </div>
 
               <div>
-              {visibleEditor ? (
-                <div>
-                  <Editor
+                {visibleEditor ? (
+                  <div>
+                    {/* <Editor
    
                     initialValue={comment.commentContent}
                     name="commentContent"
@@ -146,43 +146,55 @@ export default function CommentModal(props) {
                       content_style:
                         "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
                     }}
+                   
+
                     onEditorChange={(content, editor) => {
                       setCommentContent(content);
-
+                      
                       console.log("content", content);
                     }}
-                  />
-                  <Button
-                    type="default"
-                    onClick={() => {
-                      setVisibleEditor(!visibleEditor);
-                    }}
-                  >
-                    Cancel
-                  </Button>
+                  /> */}
+                    <TextArea
+                      name="commentContent"
+                      onChange={(e) => {
+                        setCommentContent(e.target.value);
+                        // commentContent = e.target.value;
+                        // console.log("commentContent", commentContent)
+                      }}
+                    />
+                    <Button
+                      type="default"
+                      onClick={() => {
+                        setVisibleEditor(!visibleEditor);
+                      }}
+                    >
+                      Cancel
+                    </Button>
 
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      const data = {
-                        id: comment.id,
-                        contentComment: commentContent,
-                      };
-                      console.log("Comment Update", data);
-                      dispatch(updateCommentAction(comment.id, commentContent));
-                      dispatch(getAllCommentAction(taskDetail.taskId));
-                      dispatch(getTaskDetailAction(taskDetail.taskId));
-                      setVisibleEditor(!visibleEditor);
-                    }}
-                  >
-                    Save
-                  </Button>
-                </div>
-              ) : (
-                ''
-              )}
+                    <Button
+                      type="primary"
+                      onClick={() => {
+                        const data = {
+                          id: comment.id,
+                          contentComment: commentContent,
+                        };
+                        console.log("Comment Update", data);
+                        dispatch(
+                          updateCommentAction(comment.id, commentContent)
+                        );
+                        dispatch(getTaskDetailAction(taskDetail.taskId));
+                        dispatch(getAllCommentAction(taskDetail.taskId));
+
+                        setVisibleEditor(!visibleEditor);
+                      }}
+                    >
+                      Save
+                    </Button>
+                  </div>
+                ) : (
+                  ""
+                )}
               </div>
-             
             </div>
           );
         })}

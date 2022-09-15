@@ -18,11 +18,11 @@ export default function InfoDetail(props) {
   return (
     <>
       <h1>{projectDetail.projectName}</h1>
-      <div
+      {/* <div
         dangerouslySetInnerHTML={{
           __html: `<h4>${projectDetail.description}</h4>`,
         }}
-      ></div>
+      ></div> */}
       <div className={styles.info}>
         <div className={styles.search}>
           <Search

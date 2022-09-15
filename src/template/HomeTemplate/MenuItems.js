@@ -52,11 +52,5 @@ export const menuItems = [
     key: '7',
     icon: <ThunderboltOutlined />,
   },
-  // {
-  //   label: (
-  //     <NavLink to="/components">Components</NavLink>
-  //   ),
-  //   key: '5',
-  //   icon: <SwapOutlined />,
-  // }
+
 ]

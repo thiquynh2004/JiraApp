@@ -29,7 +29,7 @@ export default function HomeTemplate() {
         <Menu
           theme="default"
           mode="inline"
-          defaultSelectedKeys={["3"]}
+          defaultSelectedKeys={["1"]}
           defaultOpenKeys={["sub1"]}
           style={{
             height: "100%",

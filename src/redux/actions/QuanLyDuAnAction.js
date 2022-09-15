@@ -97,6 +97,7 @@ export const updateProjectAction = (projectId, formData) => {
       if (result.data.statusCode === 200) {
         openNotificationWithIcon("success", "Project is updated successfully");
         dispatch(getAllProjectAction());
+        dispatch(getProjectDetailAction(projectId))
         // dispatch(hideLoadingAction);
       } else {
         openNotificationWithIcon("error", "Update project failed");
@@ -210,7 +211,6 @@ export const updateStatusAction = (contentStatus) => {
       } else {
         openNotificationWithIcon("error", "Status is updated failed");
       }
-      // console.log("hihi", result);
     } catch (error) {
       openNotificationWithIcon(
         "error",

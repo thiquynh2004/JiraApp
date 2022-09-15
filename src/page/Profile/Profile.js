@@ -1,35 +1,48 @@
-import { Button, Modal } from 'antd';
-import React, { useState } from 'react'
+import { Col, Modal, Row } from "antd";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import DetailInformation from "./DetailInformation/DetailInformation";
+import UpdateInformation from "./UpdateInformation/UpdateInformation";
+import { EditOutlined } from "@ant-design/icons";
+import styles from "./profile.module.scss";
 
 export default function Profile() {
-  const [ setLoading] = useState(false);
-  const [visible, setVisible] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const showModal = () => {
-    setVisible(true);
+    setIsModalOpen(true);
   };
 
   const handleOk = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setVisible(false);
-    }, 3000);
+    setIsModalOpen(false);
   };
 
   const handleCancel = () => {
-    setVisible(false);
+    setIsModalOpen(false);
   };
+  // const [visible, setVisible] = useState(false);
+  const { userLogin } = useSelector((state) => state.QuanLyNguoiDungReducer);
+  console.log("userLogin", userLogin);
   return (
     <div>
-      <Button onClick={showModal}>Cập nhật</Button>
-          <Modal
-            footer={null}
-            visible={visible}
-            title="Chỉnh sửa thông tin cá nhân"
-            // onOk={formik.handleSubmit}
-            onCancel={handleCancel}
-            onClick={handleOk}
-          ></Modal>
+      <Row gutter={16}>
+        <Col span={1}>
+          <span className={styles.icon} onClick={showModal}>
+            <EditOutlined />
+          </span>
+        </Col>
+        <Col span={11}>
+          <DetailInformation userLogin={userLogin} />
+        </Col>
+        <Modal
+          title="Edit User"
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+        >
+          <UpdateInformation userLogin = {userLogin}/>
+        </Modal>
+      </Row>
     </div>
-  )
+  );
 }

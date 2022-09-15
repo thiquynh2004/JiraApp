@@ -1,0 +1,15 @@
+.icon {
+
+
+  cursor: pointer;
+
+  span {
+    font-size: 24px;
+    transition: transform 0.2s;
+
+    &:hover {
+      color: rgb(49, 230, 17);
+      transform: scale(1.5);
+    }
+  }
+}

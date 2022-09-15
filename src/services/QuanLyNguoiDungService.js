@@ -18,5 +18,8 @@ export class QuanLyNguoiDungService extends baseService {
     getUserByProjectId = (idProject) => {
         return this.get(`api/Users/getUserByProjectId?idProject=${idProject}`)
     }
+    editUser = (formData) => {
+        return this.put(`/api/Users/editUser`, formData)
+    }
 }
 export const quanLyNguoiDungService = new QuanLyNguoiDungService();

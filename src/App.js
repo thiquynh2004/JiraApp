@@ -26,7 +26,8 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<HomeTemplate />}>
-            <Route path="/" element={<ProjectManagement />} />
+            <Route path="/" element={<ProjectDetail />} />
+            <Route path='/jira' element={<ProjectDetail />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/create-project" element={<CreateProject />}>
 {/* <Route index element={<ProjectManagement />} /> */}

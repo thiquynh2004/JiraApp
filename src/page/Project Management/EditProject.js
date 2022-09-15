@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Col, Form, Input, message, Row, Select } from "antd";
+import { Button, Col, Form, Input, Row, Select } from "antd";
 import { Editor } from "@tinymce/tinymce-react";
 import {
   getProjectCategoryAction,
@@ -52,6 +52,7 @@ export default function EditProject(props) {
   })
   const handleChangeSelect = (value) => {
     formik.setFieldValue("categoryId", value);
+    dispatch(getProjectDetailAction(projectDetail.id))
     // console.log("categoryId", value);
   };
   const handleEditorChange = (content, editor) => {
@@ -70,18 +71,24 @@ export default function EditProject(props) {
               <Input name="projectName" onChange={formik.handleChange} value={formik.values.projectName}/>
             </Form.Item>
           </Col>
+          {/* <span>{projectDetail?.projectCategory?.name}</span> */}
           <Col span={8}>
-            <Form.Item label="Project Category">
+          
+            <Form.Item label={projectDetail?.projectCategory?.name}>
+           
               <Select
                 defaultValue={projectDetail?.projectCategory?.id}
-                value={projectDetail?.projectCategory?.id}
+                // value={projectDetail?.projectCategory?.id}
                 name="categoryId"
                 options={arrProjectCategory?.map((pjCategory, index) => ({
                   label: pjCategory.projectCategoryName,
                   value: pjCategory.id,
                 }))}
                 onChange={handleChangeSelect}
-              ></Select>
+              >
+                 
+              </Select>
+              
             </Form.Item>
           </Col>
         </Row>

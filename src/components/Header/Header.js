@@ -37,35 +37,18 @@ export default function Header() {
     });
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+ 
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
   const operations = (
     <div>
       {!_.isEmpty(userLogin) ? (
         <div>
           <>
-            <Button  type="dashed"  size="large" onClick={showModal}>Hello {userLogin.name}</Button>
-            <Modal
-              title="Basic Modal"
-              open={isModalOpen}
-              onOk={handleOk}
-              onCancel={handleCancel}
-            >
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-              <p>Some contents...</p>
-            </Modal>
+            <NavLink to = "/profile">
+            <Button  type="dashed"  size="large">Hello {userLogin.name}</Button>
+              </NavLink>
+           
           </>
           <Button type="ghost" size="large" onClick={showLogOutConfirm}>
             Đăng xuất <LogoutOutlined />

@@ -1,0 +1,15 @@
+.detailInformation{
+    .icon{
+        padding: 50px;
+        font-size: 24px;
+        cursor: pointer;
+        transition: transform .2s;
+
+
+        &:hover{
+            // font-size: 30px;
+            color: rgb(49, 230, 17);
+            transform: scale(1.5);
+        }
+    }
+}

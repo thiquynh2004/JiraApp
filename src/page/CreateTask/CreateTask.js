@@ -9,12 +9,13 @@ import {
 } from "../../redux/actions/QuanLyDuAnAction";
 import { getAllPriorityAction } from "../../redux/actions/QuanLyPriorityAction";
 import { getAllTaskAction } from "../../redux/actions/QuanLyTaskAction";
-import {
-  getUserByProjectAction,
-  getUsersAction,
-} from "../../redux/actions/types/QuanLyNguoiDungAction";
+// import {
+//   getUserByProjectAction,
+//   getUsersAction,
+// } from "../../redux/actions/types/QuanLyNguoiDungAction";
 import { useFormik } from "formik";
 import { getAllStatusAction } from "../../redux/actions/QuanLyStatusAction";
+import { getUserByProjectAction, getUsersAction } from "../../redux/actions/QuanLyNguoiDungAction";
 const { Option } = Select;
 
 export default function CreateTask() {

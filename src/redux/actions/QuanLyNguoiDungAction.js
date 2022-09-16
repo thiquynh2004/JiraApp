@@ -1,11 +1,11 @@
 // import { history } from "../../../App";
-import { quanLyNguoiDungService } from "../../../services/QuanLyNguoiDungService";
-import { openNotificationWithIcon } from "../../types/notificationJira";
+import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService";
+import { openNotificationWithIcon } from "../types/notificationJira";
 import {
   DANG_NHAP_ACTION,
   SET_GET_LIST_USERS,
   SET_GET_USER_BY_PROJECT,
-} from "./QuanLyNguoiDungType";
+} from "./types/QuanLyNguoiDungType";
 
 export const dangNhapAction = (thongTinDangNhap) => {
   return async (dispatch) => {

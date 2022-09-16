@@ -4,7 +4,8 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import { signUpAction } from "../../redux/actions/types/QuanLyNguoiDungAction";
+import { signUpAction } from "../../redux/actions/QuanLyNguoiDungAction";
+// import { signUpAction } from "../../redux/actions/types/QuanLyNguoiDungAction";
 import styles from "./signup.module.scss";
 
 export default function SignUp() {

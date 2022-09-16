@@ -10,6 +10,7 @@ import {
   Slider,
   Modal,
   Avatar,
+  InputNumber,
 } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,8 +23,10 @@ import { Link } from "react-router-dom";
 import { getAllStatusAction } from "../../../../redux/actions/QuanLyStatusAction";
 import {
   getProjectDetailAction,
+  removeUserFromTaskAction,
   updateAssignUserTaskAction,
   updateDescriptionAction,
+  updateEstimateAction,
   updatePriorityAction,
   updateStatusAction,
   updateTimeTrackingAction,
@@ -51,14 +54,9 @@ export default function ModalDetail(props) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [visibleEditor, setVisibleEditor] = useState(false);
   const dispatch = useDispatch();
-  console.log("taskDetail", taskDetail);
-  console.log("listComment", listComment);
-  // console.log("arrStatus", arrStatus);
-  // console.log("projectDetail", projectDetail);
-  // console.log("priorityList", priorityList);
-  // const userOption = taskDetail?.assigness?.map((assignee, index) => {
-  //   return { value: assignee.id, label: assignee.name };
-  // });
+  // console.log("taskDetail", taskDetail);
+  // console.log("listComment", listComment);
+
   const userListOption = projectDetail.members
     ?.filter((member) => {
       let index = taskDetail.assigness?.findIndex(
@@ -82,7 +80,9 @@ export default function ModalDetail(props) {
   const [contentDescription, setContentsDescription] = useState(
     taskDetail.description
   );
-
+  const [estimate, setEstimate] = useState({
+    originalEstimate: taskDetail.originalEstimate,
+  });
   const handleChangeSelectStatus = (e) => {
     const contentStatus = {
       taskId: taskDetail.taskId,
@@ -105,7 +105,6 @@ export default function ModalDetail(props) {
   useEffect((idProject) => {
     dispatch(getProjectDetailAction(projectDetail.id));
     dispatch(getAllStatusAction(idProject));
-    
   }, []);
   useEffect(() => {
     dispatch(getAllTaskAction());
@@ -130,7 +129,9 @@ export default function ModalDetail(props) {
     dispatch(updateTimeTrackingAction(model));
     setIsModalOpen(false);
   };
-
+  // const handleChangeEstimate = (e) => {
+  //   console.log('estimate', e)
+  // }
   const renderDescription = () => {
     return (
       <div>
@@ -245,10 +246,7 @@ export default function ModalDetail(props) {
             {renderDescription()}
           </div>
 
-
-
-
-          <div className="comment" style={{margin: '20px 0'}}>
+          <div className="comment" style={{ margin: "20px 0" }}>
             <CommentModal taskDetail={taskDetail} listComment={listComment} />
           </div>
         </Col>
@@ -276,7 +274,6 @@ export default function ModalDetail(props) {
                 <Col span={24}>
                   <Select
                     name="assignee"
-                    // value={userOption}
                     mode="multiple"
                     allowClear
                     style={{
@@ -284,8 +281,7 @@ export default function ModalDetail(props) {
                     }}
                     options={userListOption}
                     optionFilterProp="label"
-                    placeholder="Please select"
-                    // onChange={handleChangeAssignees}
+                    placeholder="Add user"
                     onSelect={(value) => {
                       console.log("value", value);
                       const userSelected = projectDetail.members.find(
@@ -295,7 +291,6 @@ export default function ModalDetail(props) {
                         taskId: taskDetail.taskId,
                         userId: userSelected.userId,
                       };
-                      // console.log("model Assignees", model);
                       dispatch(updateAssignUserTaskAction(model));
                     }}
                   >
@@ -309,7 +304,8 @@ export default function ModalDetail(props) {
                           key={index}
                           style={{
                             display: "flex",
-                            backgroundColor: "cyan",
+                            border: "1px solid cyan",
+                            // backgroundColor: "cyan",
                             margin: "4px 0",
                           }}
                         >
@@ -319,9 +315,23 @@ export default function ModalDetail(props) {
                               alt={assignee.avatar}
                             />
                           </div>
-                          <p style={{ display: "flex", paddingTop: "6px" }}>
+                          <p
+                            onClick={() => {
+                              const data = {
+                                taskId: taskDetail.taskId,
+                                userId: assignee.id,
+                              };
+                              dispatch(removeUserFromTaskAction(data));
+                              console.log("deleteUser", data);
+                            }}
+                            style={{
+                              display: "flex",
+                              paddingTop: "6px",
+                              cursor: "pointer",
+                            }}
+                          >
                             {assignee.name}
-                            <CloseOutlined />
+                            <CloseOutlined style={{ margin: "3px" }} />
                           </p>
                         </div>
                       );
@@ -347,7 +357,26 @@ export default function ModalDetail(props) {
           </div>
           <div className="estimate">
             <h4>ORIGINAL ESTIMATE (HOURS)</h4>
-            <Input value={taskDetail.originalEstimate} />
+            <InputNumber
+              name="originalEstimate"
+              value={taskDetail.originalEstimate}
+              onChange={(e) => {
+                setEstimate({
+                  ...estimate,
+                  originalEstimate: e,
+                });
+                if (!e || e === taskDetail.originalEstimate) {
+                  return;
+                } else {
+                  const data = {
+                    taskId: taskDetail.taskId,
+                    originalEstimate: e,
+                  };
+                  console.log("estimate", data);
+                  dispatch(updateEstimateAction(data));
+                }
+              }}
+            />
           </div>
           <div className="time-tracking">
             <h4>
@@ -390,8 +419,6 @@ export default function ModalDetail(props) {
                       name="timeTrackingSpent"
                       type="number"
                       onChange={(e) => {
-                        // console.log("e", e);
-
                         setTimeTracking({
                           ...timeTracking,
                           timeTrackingSpent: e.target.value,
@@ -418,10 +445,6 @@ export default function ModalDetail(props) {
                 </Row>
               </Modal>
             </div>
-          </div>
-          <div>
-            <p>Lorem 17 is</p>
-            <p>Lorem 17 is</p>
           </div>
         </Col>
       </Row>

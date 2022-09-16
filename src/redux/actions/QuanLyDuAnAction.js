@@ -7,7 +7,7 @@ import {
   SET_GET_PROJECT_DETAIL,
   SET_GET_TASK_DETAIL,
 } from "./types/QuanLyDuAnType";
-import { getUserByProjectAction } from "./types/QuanLyNguoiDungAction";
+import { getUserByProjectAction } from "./QuanLyNguoiDungAction";
 // import { SET_GET_USER_BY_PROJECT } from "./types/QuanLyNguoiDungType";
 
 export const getProjectCategoryAction = (project) => {
@@ -294,6 +294,42 @@ export const updateAssignUserTaskAction = (model) => {
     } catch (error) {
       openNotificationWithIcon('error', error.response?.data.content)
       console.error("error", error.response?.data)
+    }
+  }
+}
+
+export const removeUserFromTaskAction = (data) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyDuAnService.removeUserFromTask(data);
+      if (result.data.statusCode === 200) {
+        openNotificationWithIcon("success", "Delete user successfully")
+        dispatch(getTaskDetailAction(data.taskId))
+      }
+      else{
+        openNotificationWithIcon("error", "Delete user failed")
+      }
+      console.log(result)
+    } catch (error) {
+      openNotificationWithIcon("error", "Delete user failed", error.response?.data.content)
+      console.error("error", error.response?.data)
+    }
+  }
+}
+
+export const updateEstimateAction = (data) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyDuAnService.updateEstimate(data);
+      if (result.data.statusCode === 200) {
+        openNotificationWithIcon("success", "Update estimate successfully");
+        dispatch(getTaskDetailAction(data.taskId));
+      }else{
+        openNotificationWithIcon("error", "Update estimate failed")
+      }
+    } catch (error) {
+      openNotificationWithIcon('error', "Update estimate failed", error.response?.data.content)
+      console.log("error", error.response?.data);
     }
   }
 }

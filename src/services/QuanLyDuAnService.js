@@ -50,5 +50,11 @@ export class QuanLyDuAnService extends baseService {
    updateAssignUserTask = (model) => {
     return this.post(`api/Project/assignUserTask`, model)
    }
+   removeUserFromTask = (data) => {
+    return this.post(`api/Project/removeUserFromTask`, data);
+   }
+   updateEstimate = (data) => {
+    return this.put(`api/Project/updateEstimate`, data);
+   }
 }
 export const quanLyDuAnService = new QuanLyDuAnService();

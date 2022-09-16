@@ -4,15 +4,15 @@ import { Button, Checkbox, Col, Form, Input, Row } from "antd";
 import React, { useEffect } from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {useFormik} from "formik";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import styles from "./login.module.scss";
-import { dangNhapAction } from "../../redux/actions/types/QuanLyNguoiDungAction";
+import { dangNhapAction } from "../../redux/actions/QuanLyNguoiDungAction";
 import { USER_LOGIN } from "../../util/config";
 
 export default function Login() {
   const dispatch = useDispatch();
-  const {userLogin} = useSelector((state) => state.QuanLyNguoiDungReducer);
-  console.log("userLogin", userLogin);
+  // const {userLogin} = useSelector((state) => state.QuanLyNguoiDungReducer);
+  // console.log("userLogin", userLogin);
   const navigate = useNavigate();
   useEffect(() => {
     if(localStorage.getItem(USER_LOGIN)){

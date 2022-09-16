@@ -23,8 +23,8 @@ import styles from "./comment.module.scss";
 const { TextArea } = Input;
 export default function CommentModal(props) {
   const { taskDetail, listComment } = props;
-  console.log("taskDetail", taskDetail);
-  console.log("listComment", listComment);
+  // console.log("taskDetail", taskDetail);
+  // console.log("listComment", listComment);
   const dispatch = useDispatch();
   // const editorRef = useRef(null);
   const [comments, setComments] = useState({

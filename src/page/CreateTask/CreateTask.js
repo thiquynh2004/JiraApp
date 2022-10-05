@@ -30,18 +30,18 @@ export default function CreateTask() {
   const { projectList } = useSelector((state) => state.QuanLyDuAnReducer);
   const { taskList } = useSelector((state) => state.QuanLyTaskReducer);
   const { priorityList } = useSelector((state) => state.QuanLyPriorityReducer);
-  const { arrUsers } = useSelector((state) => state.QuanLyNguoiDungReducer);
+  // const { arrUsers } = useSelector((state) => state.QuanLyNguoiDungReducer);
   const { arrStatus } = useSelector((state) => state.QuanLyStatusReducer);
   const { arrUserByProjects } = useSelector(
     (state) => state.QuanLyNguoiDungReducer
   );
 
-  console.log("arrUserByProjects", arrUserByProjects);
-  console.log("projectList", projectList);
-  console.log("task", taskList);
-  console.log("priorityList", priorityList);
-  console.log("arrUsers", arrUsers);
-  console.log("arrStatus", arrStatus);
+  // console.log("arrUserByProjects", arrUserByProjects);
+  // console.log("projectList", projectList);
+  // console.log("task", taskList);
+  // console.log("priorityList", priorityList);
+  // console.log("arrUsers", arrUsers);
+  // console.log("arrStatus", arrStatus);
 
   useEffect(() => {
     dispatch(getAllProjectAction());

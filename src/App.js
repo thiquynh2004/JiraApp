@@ -27,8 +27,8 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
 
         <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<HomeTemplate />}>
-            <Route path="/" element={<ProjectDetail />} />
+          <Route element={<HomeTemplate />}>
+            <Route path="/" element={<ProjectManagement />} />
             <Route path="/jira" element={<ProjectDetail />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/create-project" element={<CreateProject />}></Route>

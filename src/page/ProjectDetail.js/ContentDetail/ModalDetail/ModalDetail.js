@@ -62,7 +62,7 @@ export default function ModalDetail(props) {
   const dispatch = useDispatch();
   // console.log("taskDetail", taskDetail);
   // console.log("listComment", listComment);
-  console.log("props", props);
+  // console.log("props", props);
   const userListOption = projectDetail.members
     ?.filter((member) => {
       let index = taskDetail.assigness?.findIndex(

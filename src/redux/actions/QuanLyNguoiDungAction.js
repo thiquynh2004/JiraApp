@@ -31,6 +31,16 @@ export const dangNhapAction = (thongTinDangNhap) => {
     }
   };
 };
+export const facebookLoginAction = (facebookToken) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyNguoiDungService.facebookLogin(facebookToken);
+      console.log('result', result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+}
 
 export const signUpAction = (thongTinDangKy) => {
   return async (dispatch) => {
@@ -96,9 +106,31 @@ export const editUserAction = (formData) => {
       openNotificationWithIcon(
         "error",
         "Update user is failed",
-        error.response?.data.message
+        error.response?.data.content
       );
       console.error("error", error.response?.data);
+    }
+  };
+};
+
+export const deleteUserAction = (id) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyNguoiDungService.deleteUser(id);
+      console.log(result);
+      if (result.data.statusCode === 200) {
+        openNotificationWithIcon("success", "Delete user is successfully");
+        dispatch(getUsersAction());
+      } else {
+        openNotificationWithIcon("error", "Delete user is failed");
+      }
+    } catch (error) {
+      openNotificationWithIcon(
+        "error",
+        "Delete user is failed",
+        error.response?.data.content
+      );
+      console.log(error);
     }
   };
 };

@@ -333,3 +333,22 @@ export const updateEstimateAction = (data) => {
     }
   }
 }
+
+export const removeTaskAction = (taskId) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyDuAnService.removeTask(taskId);
+      if(result.data.statusCode === 200){
+        openNotificationWithIcon("success", "Delete task successfully");
+        
+
+      }else{
+        openNotificationWithIcon("error", "Delete task failed");
+      }
+      console.log(result)
+    } catch (error) {
+      openNotificationWithIcon("error", "Delete task failed", error.response?.data.content);
+      console.log("error", error.response?.data);
+    }
+  }
+}

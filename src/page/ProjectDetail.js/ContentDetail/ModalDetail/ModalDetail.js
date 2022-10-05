@@ -11,6 +11,7 @@ import {
   Modal,
   Avatar,
   InputNumber,
+  Popconfirm,
 } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,11 +19,15 @@ import {
   BookOutlined,
   ClockCircleOutlined,
   CloseOutlined,
+  DeleteOutlined,
+  SendOutlined,
+  CopyOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { getAllStatusAction } from "../../../../redux/actions/QuanLyStatusAction";
 import {
   getProjectDetailAction,
+  removeTaskAction,
   removeUserFromTaskAction,
   updateAssignUserTaskAction,
   updateDescriptionAction,
@@ -36,7 +41,7 @@ import { getAllTaskAction } from "../../../../redux/actions/QuanLyTaskAction";
 import { Editor } from "@tinymce/tinymce-react";
 import CommentModal from "./CommentModal";
 import { getAllCommentAction } from "../../../../redux/actions/QuanLyCommentAction";
-
+import styles from "./modalDetail.module.scss";
 const { Option } = Select;
 const children = [];
 
@@ -45,6 +50,7 @@ for (let i = 10; i < 36; i++) {
 }
 
 export default function ModalDetail(props) {
+  const { setOpen } = props;
   const { taskDetail } = useSelector((state) => state.QuanLyDuAnReducer);
   const { arrStatus } = useSelector((state) => state.QuanLyStatusReducer);
   const { projectDetail } = useSelector((state) => state.QuanLyDuAnReducer);
@@ -56,7 +62,7 @@ export default function ModalDetail(props) {
   const dispatch = useDispatch();
   // console.log("taskDetail", taskDetail);
   // console.log("listComment", listComment);
-
+  console.log("props", props);
   const userListOption = projectDetail.members
     ?.filter((member) => {
       let index = taskDetail.assigness?.findIndex(
@@ -251,8 +257,36 @@ export default function ModalDetail(props) {
           </div>
         </Col>
         <Col span={8}>
-          <Link to="#">Give feedback</Link>
-          <Link to="#">Copy Link</Link>
+          <div className={styles.action}>
+            <span>
+              <Link to="#" className={styles.link}>
+                <SendOutlined />
+                Give feedback
+              </Link>
+            </span>
+            <span>
+              <Link to="#" className={styles.link}>
+                <CopyOutlined />
+                Copy Link
+              </Link>
+            </span>
+            <Popconfirm
+              placement="topLeft"
+              title="Are you sure to delete this task?"
+              onConfirm={() => {
+                dispatch(removeTaskAction(taskDetail.taskId));
+                dispatch(getProjectDetailAction(projectDetail.id));
+                setTimeout(() => {
+                  setOpen(false);
+                }, 1000);
+              }}
+              okText="Yes"
+              cancelText="No"
+            >
+              <DeleteOutlined className={styles.icon} />
+            </Popconfirm>
+          </div>
+
           <div className="status">
             <h4>STATUS </h4>
             <Form.Item>

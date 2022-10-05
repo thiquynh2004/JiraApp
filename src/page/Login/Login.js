@@ -2,59 +2,59 @@
 import { Button, Checkbox, Col, Form, Input, Row } from "antd";
 // import { FacebookOutlined } from "@ant-design/icons";
 import React, { useEffect } from "react";
-import {Link, useNavigate} from "react-router-dom";
-import {useFormik} from "formik";
-import {useDispatch} from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
 import styles from "./login.module.scss";
 import { dangNhapAction } from "../../redux/actions/QuanLyNguoiDungAction";
 import { USER_LOGIN } from "../../util/config";
-
+// import FacebookLogin from "react-facebook-login";
+// import axios from "axios";
+// import { TokenCybersoft } from "../../util/config"
 export default function Login() {
   const dispatch = useDispatch();
-  // const {userLogin} = useSelector((state) => state.QuanLyNguoiDungReducer);
-  // console.log("userLogin", userLogin);
   const navigate = useNavigate();
   useEffect(() => {
-    if(localStorage.getItem(USER_LOGIN)){
-    navigate("/")
+    if (localStorage.getItem(USER_LOGIN)) {
+      navigate("/");
     }
-  },[])
+  }, []);
 
- 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      passWord: '',
+      email: "",
+      passWord: "",
     },
-    onSubmit: values => {
+    onSubmit: (values) => {
       const action = dangNhapAction(values);
       dispatch(action);
       console.log("values", values);
-      // message.success(
-      //   {
-      //     content: "Đăng nhập thành công",
-      //     className: "message",
-      //     style: {
-      //       marginTop: "10vh",
-      //       fontSize: "20px",
-      //     },
-      //   },
-      //   setTimeout(() => {
-      //    navigate("/")
-      //   }, 1000)
-      // );
-    }
+    },
+  });
 
-  })
+  // const responseFacebook = (response) => {
+  //   axios({
+  //     url: "http://jiranew.cybersoft.edu.vn/api/Users/facebooklogin",
+  //     method: "POST",
+  //     data: {
+  //       facebookToken: response.accessToken,
+  //     },
+  //     headers:{
+  //       TokenCybersoft,
+  //   }
+  //   }).then((res) => {
+  //     console.log(res)
+  //     localStorage.setItem("accessToken", res.data.content.accessToken);
+  //   });
+  // };
   return (
     <div className={styles.login}>
       <Row style={{ height: window.innerHeight }}>
         <Col span={12} className={styles.left}>
-          {/* <h1>Welcome to </h1> */}
         </Col>
         <Col span={12} className={styles.right}>
           <h1>Welcome to Jira, </h1>
-          {/* <hr/> */}
+
           <Form
             onSubmitCapture={formik.handleSubmit}
             name="basic"
@@ -80,7 +80,7 @@ export default function Login() {
                 },
               ]}
             >
-              <Input name="email" onChange={formik.handleChange}/>
+              <Input name="email" onChange={formik.handleChange} />
             </Form.Item>
 
             <Form.Item
@@ -93,7 +93,7 @@ export default function Login() {
                 },
               ]}
             >
-              <Input.Password name="passWord" onChange={formik.handleChange}/>
+              <Input.Password name="passWord" onChange={formik.handleChange} />
             </Form.Item>
 
             <Form.Item
@@ -113,27 +113,32 @@ export default function Login() {
                 span: 16,
               }}
             >
-              <Button type="primary" htmlType="submit" onClick={() => {
-                setTimeout(() => {
-                  navigate("/")
-                }, 2000)
-                
-              }} >
+              <Button
+                type="primary"
+                htmlType="submit"
+                onClick={() => {
+                  setTimeout(() => {
+                    navigate("/");
+                  }, 2000);
+                }}
+              >
                 Login
               </Button>
             </Form.Item>
           </Form>
           <div className={styles.facebookLogin}>
             {/* <p>or</p>
-            <Button>
-              
-              <FacebookOutlined />
-              Login with Facebook
-            </Button> */}
+            <FacebookLogin
+              appId="783609159586705"
+              autoLoad={true}
+              fields="name,email,picture"
+              callback={responseFacebook}
+            />
+            */}
           </div>
           <div className={styles.register}>
             <p>Don't you have an account?</p>
-            <Link to ="/signup">Sign Up </Link>
+            <Link to="/signup">Sign Up </Link>
           </div>
         </Col>
       </Row>

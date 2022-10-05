@@ -16,6 +16,8 @@ import CreateTask from "./page/CreateTask/CreateTask";
 import Profile from "./page/Profile/Profile";
 
 import Loading from "./components/Loading/Loading";
+import UserManagement from "./page/UserManagement/UserManagement";
+import EditUser from "./page/UserManagement/EditUser/EditUser";
 function App() {
   return (
     <>
@@ -27,20 +29,19 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<HomeTemplate />}>
             <Route path="/" element={<ProjectDetail />} />
-            <Route path='/jira' element={<ProjectDetail />} />
+            <Route path="/jira" element={<ProjectDetail />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/create-project" element={<CreateProject />}>
-{/* <Route index element={<ProjectManagement />} /> */}
-            </Route>
+            <Route path="/create-project" element={<CreateProject />}></Route>
             <Route path="/project-management" element={<ProjectManagement />} />
             <Route
               path="/project-management/edit/:projectId"
               element={<EditProject />}
-            >
-              
-            </Route>
+            ></Route>
             <Route path="/project-detail/:id" element={<ProjectDetail />} />
             <Route path="/create-task" element={<CreateTask />} />
+            <Route path="/admin/quanLyNguoiDung" element={<UserManagement />}/>
+            <Route path="/admin/quanLyNguoiDung/:id" element={<EditUser />} />
+
           </Route>
         </Route>
         <Route path="*" element={<PageNotFound />} />

@@ -6,7 +6,6 @@ import {
   Avatar,
   Button,
   List,
-  message,
   Modal,
   Popover,
   Space,
@@ -38,7 +37,6 @@ export default function ProjectManagement(props) {
   console.log("projectList", projectList);
   const dispatch = useDispatch();
   useEffect(() => {
-
     dispatch(getAllProjectAction());
   }, []);
   const [sortedInfo, setSortedInfo] = useState({});
@@ -271,7 +269,7 @@ export default function ProjectManagement(props) {
 
                   onOk() {
                     dispatch(deleteProjectAction(projectList.id));
-                    message.success("Deleted successfully!!");
+                    // message.success("Deleted successfully!!");
                     console.log("OK");
                   },
 

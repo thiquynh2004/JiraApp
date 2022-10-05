@@ -10,7 +10,9 @@ export default function InfoDetail(props) {
     return projectDetail.members?.map((user, index) => {
       return (
         <div key={index}>
-          <Avatar src={user.avatar} alt={user.avatar} />
+          <Avatar src={user.avatar} alt={user.avatar} style={{cursor: "pointer"}} onClick={()=>{
+            
+          }}/>
         </div>
       );
     });
@@ -18,11 +20,6 @@ export default function InfoDetail(props) {
   return (
     <>
       <h1>{projectDetail.projectName}</h1>
-      {/* <div
-        dangerouslySetInnerHTML={{
-          __html: `<h4>${projectDetail.description}</h4>`,
-        }}
-      ></div> */}
       <div className={styles.info}>
         <div className={styles.search}>
           <Search

@@ -56,5 +56,8 @@ export class QuanLyDuAnService extends baseService {
    updateEstimate = (data) => {
     return this.put(`api/Project/updateEstimate`, data);
    }
+   removeTask = (taskId) => {
+    return this.delete(`api/Project/removeTask?taskId=${taskId}`);
+   }
 }
 export const quanLyDuAnService = new QuanLyDuAnService();

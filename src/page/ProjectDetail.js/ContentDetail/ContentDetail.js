@@ -146,7 +146,7 @@ export default function ContentDetail(props) {
                         onCancel={() => setOpen(false)}
                         width={1000}
                       >
-                        <ModalDetail />
+                        <ModalDetail setOpen={setOpen}/>
                       </Modal>
                     </Card>
                     {provided.placeholder}

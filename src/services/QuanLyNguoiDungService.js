@@ -9,6 +9,9 @@ export class QuanLyNguoiDungService extends baseService {
         return this.post(`api/Users/signin`, thongTinDangNhap);
 
     }
+    facebookLogin = (facebookToken) => {
+        return this.post(`api/Users/facebooklogin`, facebookToken)
+    }
     signup = (thongTinDangKy) => {
         return this.post(`api/Users/signup`, thongTinDangKy);
     }
@@ -19,7 +22,10 @@ export class QuanLyNguoiDungService extends baseService {
         return this.get(`api/Users/getUserByProjectId?idProject=${idProject}`)
     }
     editUser = (formData) => {
-        return this.put(`/api/Users/editUser`, formData)
+        return this.put(`api/Users/editUser`, formData)
+    }
+    deleteUser = (id) => {
+        return this.delete(`api/Users/deleteUser?id=${id}`)
     }
 }
 export const quanLyNguoiDungService = new QuanLyNguoiDungService();

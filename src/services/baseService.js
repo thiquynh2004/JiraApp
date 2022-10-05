@@ -29,7 +29,7 @@ export class baseService {
             method:'PUT',
             headers:{
                 TokenCybersoft,
-                'Authorization': `Bearer ${localStorage.getItem(TOKEN)}`
+                'Authorization': `Bearer ${localStorage.getItem(TOKEN)}`,
             }
         })
     }

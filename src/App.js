@@ -1,7 +1,5 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
-// import Home from "./page/Home";
-// import Home from "./page/Home";
 import HomeTemplate from "./template/HomeTemplate/HomeTemplate";
 import "antd/dist/antd.min.css";
 import Login from "./page/Login/Login";

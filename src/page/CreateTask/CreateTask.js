@@ -36,7 +36,7 @@ export default function CreateTask() {
     (state) => state.QuanLyNguoiDungReducer
   );
 
-  // console.log("arrUserByProjects", arrUserByProjects);
+  console.log("arrUserByProjects", arrUserByProjects);
   // console.log("projectList", projectList);
   // console.log("task", taskList);
   // console.log("priorityList", priorityList);
@@ -65,7 +65,7 @@ export default function CreateTask() {
 
   const editorRef = useRef(null);
 
-  const userOption = arrUserByProjects.map((user, index) => {
+  const userOption = arrUserByProjects?.map((user, index) => {
     return { value: user.userId, label: user.name };
   });
 

@@ -5,6 +5,7 @@ import {
   AutoComplete,
   Avatar,
   Button,
+  Input,
   List,
   Modal,
   Popover,
@@ -25,7 +26,7 @@ import { NavLink } from "react-router-dom";
 import { getUsersAction } from "../../redux/actions/QuanLyNguoiDungAction";
 // import { getUsersAction } from "../../redux/actions/types/QuanLyNguoiDungAction";
 // import { displayLoadingAction } from "../../redux/actions/LoadingAction";
-
+const { Search } = Input;
 const { confirm } = Modal;
 const { Option } = AutoComplete;
 export default function ProjectManagement(props) {
@@ -35,6 +36,7 @@ export default function ProjectManagement(props) {
   const { arrUsers } = useSelector((state) => state.QuanLyNguoiDungReducer);
   console.log("arrUsers", arrUsers);
   console.log("projectList", projectList);
+  
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllProjectAction());
@@ -55,7 +57,7 @@ export default function ProjectManagement(props) {
     setFilteredInfo({});
     setSortedInfo({});
   };
-
+  const onSearch = (value) => console.log(value);
   const columns = [
     {
       title: "Id",
@@ -308,10 +310,19 @@ export default function ProjectManagement(props) {
       <Space
         style={{
           marginBottom: 16,
+          display: 'flex',
+          justifyContent: 'flex-end'
         }}
       >
         <Button onClick={clearFilters}>Clear filters</Button>
         <Button onClick={clearAll}>Clear filters and sorters</Button>
+        <Search
+      placeholder="Search project"
+      allowClear
+      enterButton="Search"
+      // size="large"
+      onSearch={onSearch}
+    />
       </Space>
       <Table
         columns={columns}

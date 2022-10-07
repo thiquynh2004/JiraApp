@@ -57,6 +57,7 @@ export default function CreateTask() {
   }, []);
   useEffect((idProject) => {
     dispatch(getAllStatusAction(idProject));
+    // dispatch(getUserByProjectAction(idProject))
   }, []);
 
   const onFormLayoutChange = ({ size }) => {
@@ -65,7 +66,7 @@ export default function CreateTask() {
 
   const editorRef = useRef(null);
 
-  const userOption = arrUserByProjects?.map((user, index) => {
+  const userOption = arrUserByProjects.map((user, index) => {
     return { value: user.userId, label: user.name };
   });
 

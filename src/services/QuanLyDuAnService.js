@@ -59,5 +59,8 @@ export class QuanLyDuAnService extends baseService {
    removeTask = (taskId) => {
     return this.delete(`api/Project/removeTask?taskId=${taskId}`);
    }
+   searchProject = (keyword) => {
+    return this.get(`api/Project/getAllProject?keyword=${keyword}`);
+   }
 }
 export const quanLyDuAnService = new QuanLyDuAnService();

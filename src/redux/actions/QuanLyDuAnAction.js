@@ -2,6 +2,7 @@ import { quanLyDuAnService } from "../../services/QuanLyDuAnService";
 import { openNotificationWithIcon } from "../types/notificationJira";
 // import { displayLoadingAction, hideLoadingAction } from "./LoadingAction";
 import {
+  GET_PROJECT_SEARCH,
   SET_GET_ALL_PROJECTS,
   SET_GET_PROJECT_CATEGORY,
   SET_GET_PROJECT_DETAIL,
@@ -350,5 +351,20 @@ export const removeTaskAction = (taskId) => {
       openNotificationWithIcon("error", "Delete task failed", error.response?.data.content);
       console.log("error", error.response?.data);
     }
+  }
+}
+
+export const searchProjectAction = (keyword) => {
+  return async (dispatch) => {
+    try {
+      const result = await quanLyDuAnService.searchProject(keyword);
+    dispatch({
+      type: GET_PROJECT_SEARCH,
+      projectList : result.data.content
+    })
+    } catch (error) {
+      console.log("error", error.response?.data)
+    }
+    
   }
 }

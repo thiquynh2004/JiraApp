@@ -21,6 +21,7 @@ import {
   deleteProjectAction,
   getAllProjectAction,
   removeUserFromProjectAction,
+  searchProjectAction,
 } from "../../redux/actions/QuanLyDuAnAction";
 import { NavLink } from "react-router-dom";
 import { getUsersAction } from "../../redux/actions/QuanLyNguoiDungAction";
@@ -57,7 +58,9 @@ export default function ProjectManagement(props) {
     setFilteredInfo({});
     setSortedInfo({});
   };
-  const onSearch = (value) => console.log(value);
+  const onSearch = (value) => {
+    dispatch(searchProjectAction(value));
+  };
   const columns = [
     {
       title: "Id",

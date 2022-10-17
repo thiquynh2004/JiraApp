@@ -1,5 +1,6 @@
 import {
   CHANGE_VALUE_MODAL,
+  GET_PROJECT_SEARCH,
   SET_GET_ALL_PROJECTS,
   SET_GET_PROJECT_CATEGORY,
   SET_GET_PROJECT_DETAIL,
@@ -37,6 +38,10 @@ export const QuanLyDuAnReducer = (state = initialState, action) => {
       const {name, value} = action;
       console.log("changeModal", state.taskDetail)
       return {...state, taskDetail:{...state.taskDetail, [name]: value}, ...state.projectDetail}
+    }
+    case GET_PROJECT_SEARCH: {
+      state.projectList = action.projectList;
+      return{ ...state}
     }
     default:
       return { ...state };

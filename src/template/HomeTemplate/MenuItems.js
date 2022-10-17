@@ -2,10 +2,7 @@ import { NavLink } from "react-router-dom";
 import {
   BankOutlined,
   CopyOutlined,
-  // UserAddOutlined,
-  GroupOutlined,
-  // UsergroupAddOutlined,
-
+  UsergroupAddOutlined,
   ThunderboltOutlined,
   SettingOutlined,
   HighlightOutlined,
@@ -30,10 +27,11 @@ export const menuItems = [
     icon: <SettingOutlined />,
   },
   {
-    label: <NavLink to="/Releases">Releases</NavLink>,
+    label: <NavLink to="/admin/quanLyNguoiDung">User management</NavLink>,
     key: "4",
-    icon: <CarOutlined />,
+    icon: <UsergroupAddOutlined />,
   },
+
   {
     label: <NavLink to="/issues">Issues and Filter</NavLink>,
     key: "5",
@@ -50,16 +48,8 @@ export const menuItems = [
     icon: <ThunderboltOutlined />,
   },
   {
-    label: <NavLink to="/admin/quanLyNguoiDung">User management</NavLink>,
+    label: <NavLink to="/Releases">Releases</NavLink>,
     key: "8",
-    icon: <GroupOutlined />,
-    // children: [
-    //   {
-    //     label: <NavLink to="/create-user">Create User</NavLink>,
-    //     key: "9",
-    //     icon: <UserAddOutlined />,
-    //   },
-     
-    // ],
+    icon: <CarOutlined />,
   },
 ];

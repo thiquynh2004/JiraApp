@@ -140,7 +140,9 @@ export const assignUserProjectAction = (userProject) => {
   return async (dispatch) => {
     try {
       const result = await quanLyDuAnService.assignUserProject(userProject);
-      dispatch(getAllProjectAction());
+      if(result.data.statusCode === 200 ){
+        dispatch(getProjectDetailAction())
+      }
       console.log("result", result);
     } catch (error) {
       console.log("error", error.response?.data);
